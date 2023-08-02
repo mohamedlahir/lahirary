@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="author" content="Untree.co" />
+	<link rel="shortcut icon" href="favicon.png" />
+
+	<meta name="description" content="" />
+	<meta name="keywords" content="bootstrap, bootstrap5" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+	<title>
+		Student
+	</title>
+</head>
+
+<body>
+
+
+
+
+
+	<div class="container">
+		<h1>
+
+			Student Complete List
+
+		</h1>
+		<div align="right">
+
+			<h2 style="text-align: right;">
+				<p> Student Count :
+					<span th:text="${count}"></span>
+				</p>
+			</h2>
+		</div>
+		<form th:action="@{/students-home}" method="get">
+			<div>
+				<label for="keyword">Search: </label>
+				<input id="keyword" type="text" th:name="keyword" style="display:inline-block;">
+				<button type="submit" class="btn btn-success">Search</button>
+			</div>
+		</form>
+		<div align="right">
+			<a th:href="@{/register}" class="btn btn-success">Add User </a>
+		</div>
+		<div align="center">
+
+			<table border="3" class="table table-dark">
+				<thead>
+					<tr>
+						<th>
+						<th scope="col">
+							Roll No
+						</th>`
+
+
+						<th scope="col">
+							Name
+
+						</th>
+						<th scope="col">
+							Grade
+
+						</th>
+						<th scope="col">
+							Section
+
+						<th scope="col">
+							Actions
+
+						</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="student:${students}">
+						<th scope="col">
+						<td th:text=${student.rollnum}></td>
+						<td th:text=${student.name}></td>
+						<td th:text=${student.grade}></td>
+						<td th:text=${student.section}></td>
+						<td>
+							<a th:href="@{/view-student/{rollnum}(rollnum=${student.rollnum})}"
+								class="btn btn-success">View</a>
+							<a th:href="@{/update-student/{rollnum}(rollnum=${student.rollnum})}"
+								class="btn btn-primary">Edit</a>
+							<a th:href="@{/delete-student/{rollnum}(rollnum=${student.rollnum})}"
+								class="btn btn-danger">Delete</a>
+
+						</td>
+						</th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+
+</html>
