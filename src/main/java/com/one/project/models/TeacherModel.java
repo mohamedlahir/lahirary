@@ -17,6 +17,7 @@ public class TeacherModel {
 
 	@Column(nullable = false)
 	private String subjectsHandling[];
+	
 	@Column(nullable = false)
 	private String classesHandling[];
 
