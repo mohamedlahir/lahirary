@@ -22,9 +22,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
         if (user == null) {
 			throw new UsernameNotFoundException("User not found");
 		}
-        return new MyUserPrincipal(user);
+        return user;
 
     }
-
-
 }	

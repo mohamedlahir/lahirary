@@ -1,6 +1,37 @@
 package com.one.project.models;
 
-public enum Role {
-	ADMIN, USER, TEACHER, PRINCIPAL, PARENT, STUDENT
+import java.io.Serializable;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class Role implements Serializable  {
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer id ;
+    @Enumerated(EnumType.STRING)
+    RoleName roleName ;
+
+    public Role (RoleName roleName) {this.roleName = roleName;}
+    public String getRoleName() {
+        return roleName.toString();
+    }
 }

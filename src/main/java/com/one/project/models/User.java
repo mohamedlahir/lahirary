@@ -1,20 +1,28 @@
 package com.one.project.models;
 
+import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import jakarta.persistence.CascadeType;
 
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.authority.SimpleGrantedAuthority;
 //import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
 @Entity
-public class User {
+public class User implements Serializable , UserDetails{
 //public class User implements UserDetails {
 	@Id
 	private String email;
@@ -25,9 +33,16 @@ public class User {
 	private boolean married;
 	private Date birthday;
 	private String profession;
+	
+	@ManyToMany(fetch = FetchType.EAGER  , cascade = CascadeType.PERSIST)
+    List <Role> roles ;
 
-	@Enumerated(EnumType.STRING)
-	private Role role;
+
+    public User (String email , String password , List<Role> roles) {
+      this.email= email ;
+      this.password=password ;
+      this.roles=roles ;}
+
 
 	@Override
 	public String toString() {
@@ -100,13 +115,38 @@ public class User {
 		this.password = password;
 	}
 
-	public Role getRole() {
-		return role;
-	}
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
+	 @Override
+	    public Collection<? extends GrantedAuthority> getAuthorities() {
+	        List<GrantedAuthority> authorities = new ArrayList<>();
+	        this.roles.forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getRoleName())));
+	        return authorities;
+	    }
+
+	    @Override
+	    public String getUsername() {
+	        return this.email;
+	    }
+
+	    @Override
+	    public boolean isAccountNonExpired() {
+	        return true;
+	    }
+
+	    @Override
+	    public boolean isAccountNonLocked() {
+	        return true;
+	    }
+
+	    @Override
+	    public boolean isCredentialsNonExpired() {
+	        return true;
+	    }
+
+	    @Override
+	    public boolean isEnabled() {
+	        return true;
+	    }
 
 //	@Override
 //	public Collection<? extends GrantedAuthority> getAuthorities() {
