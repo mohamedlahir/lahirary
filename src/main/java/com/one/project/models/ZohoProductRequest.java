@@ -26,9 +26,6 @@ public class ZohoProductRequest {
 	Date updated_time;
 	String product_id;
 
-
-
-
 	public String getProduct_id() {
 		return product_id;
 	}

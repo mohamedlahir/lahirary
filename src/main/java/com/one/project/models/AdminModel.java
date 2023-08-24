@@ -13,7 +13,7 @@ public class AdminModel {
 	private String address;
 	private String schoolName;
 	private String schoolID;
-
+	
 	@Override
 	public String toString() {
 		return "AdminModel [paymentID=" + paymentID + ", name=" + name + ", email=" + email + ", address=" + address

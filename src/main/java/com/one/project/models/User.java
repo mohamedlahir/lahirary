@@ -92,6 +92,22 @@ public class User {
 		this.profession = profession;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
 //	@Override
 //	public Collection<? extends GrantedAuthority> getAuthorities() {
 //		// TODO Auto-generated method stub
