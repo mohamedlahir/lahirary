@@ -1,6 +1,7 @@
 package com.one.project.security;
 
 import java.time.Instant;
+
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
@@ -61,6 +62,7 @@ public class JwtUtilities {
 	            return true;
 	        } catch (SignatureException e) {
 	        	System.out.println(e);
+	        
 //	            log.info("Invalid JWT signature.");
 //	            log.trace("Invalid JWT signature trace: {}", e);
 //	        } catch (MalformedJwtException e) {
